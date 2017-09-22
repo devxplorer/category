@@ -2,7 +2,7 @@ from category.models import Category
 
 
 def get_categories_original(outfit_id, user_id):
-    categories = Category.objects.filter(owner_id=user_id).order_by('id')
+    categories = Category.objects.filter(owner_id=user_id)
     added = categories.extra(select={'added': '1'}).filter(outfits__pk=outfit_id)
     added = list(added.values('added', 'name', 'id'))
     added_f = categories.extra(select={'added': '0'}).exclude(outfits__pk=outfit_id)
